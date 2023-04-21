@@ -1,0 +1,50 @@
+
+Working Checklist (edit it as I think of things that need to be done)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+> Pinning functionality: when a user clicks on a quote, it should be pinned to
+the top, even when a new search is performed the quote should still be there
+    > It also needs to be able to be unpinned
+> Touch events so that it works on mobile? Do I need separate event
+listeners for touch events?
+
+> Implement more of the color pallette to make it look better
+
+> Implement JavaScript for when all the searched quotes are appended, so
+that the page title and the search bar snap to the top (and the random quote
+given upon page load is removed)
+    > Animation for this, so it's smoother
+    > I tried to do this and messed up all the code, so that nothing is aligned
+    Maybe try to fix what happened, if I can't, go back to where I was before
+    and think of another way to make main-container move to the top
+    > Get it to work so that you can search for more than one author, it only
+    works once right now
+> Use rest syntax to put as many first, middle, and last names into the search
+bar as needed
+
+> Accessibility
+    > Everything should be accessible via tab and spacebar / enter keys. The
+    aria tags should make sense when read off by the screen reader so that a 
+    user that can't see the screen can get a pretty good idea of what's on the 
+    page
+
+|| DONE ||
+> Figure out how the query thing works for the database that prof gave. I could
+mess around with this on my own, but it's probably easier to wait for prof to
+post documentation
+    > Emailed prof
+    > Check out Quotable API that he mimicked
+    > Wait for documentation, the easiest way, but it's taking prof some time to 
+    post it
+
+> Fix media queries so that it looks when super big on a monitor too
+
+> Use media queries to figure out how large the screen is and adjust elements
+accordingly
+    > I need some sort of 'threshold' for when the elements should shift
+    to a desktop design and vice versa, watch profs videos for this
+    > I assume some of this will be done by standard 'width' properties
+
+> Fix JavaScript so that the random quote is inserted within a div
+below the search bar
+    > Do this before inserting all the quotes that match the search,
+    because that is just doing this x number of times (but not at random)
