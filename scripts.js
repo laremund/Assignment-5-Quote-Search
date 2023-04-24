@@ -1,4 +1,5 @@
 
+
 // Array to hold all the quotes currently on the page, will fill with Quote objs
 let currentQuotes = [[], []];
 
@@ -23,15 +24,43 @@ async function getRandomQuote() {
 
 // Append any given quote to the expanding quote container
 let appendQuote = (quoteObj) => {
-    // Create a new div with the info from quoteObj
     let quoteHtml = ``;
-    quoteHtml =
-        `<div class="quote-container">
-            <div class="quote">${quoteObj.getQuote()[0]}<br>- ${quoteObj.getQuote()[1]}</div>
-        </div>`;
+    // (Below) use array of quote objects representing pinned and unpinned quotes
+    // to decide how to style an element before appending it
+    for (i in currentQuotes[0]) {
+        let pinnedQuote = currentQuotes[0][i];
+        if (pinnedQuote.text == quoteObj.text) {
+            quoteHtml =
+            `${quoteObj.getQuote()[0]}<br>- ${quoteObj.getQuote()[1]}`;
+        }
+    }
+    for (i in currentQuotes[1]) {
+        let unpinnedQuote = currentQuotes[1][i];
+        if (unpinnedQuote.text == quoteObj.text) {
+            quoteHtml =
+            `${quoteObj.getQuote()[0]}<br>- ${quoteObj.getQuote()[1]}`
+        }
+    }
+
+    // Create a new div with the info from quoteObj
     let quotesContainer = document.getElementById('expanding-quote-container');
     let divQuote = document.createElement('div');
+
+    for (i in currentQuotes[0]) {
+        let obj = currentQuotes[0][i];
+        if (obj == quoteObj) {
+            divQuote.setAttribute('class', 'quote-container-pinned');
+        }
+    }
+    for (i in currentQuotes[1]) {
+        let obj = currentQuotes[1][i];
+        if (obj == quoteObj) {
+            divQuote.setAttribute('class', 'quote-container');
+        }
+    }
+    // divQuote.setAttribute('class', 'quote-container');
     divQuote.innerHTML = quoteHtml;
+    console.log(divQuote);
     // Add an event listener that pins a quote to the top of the list if clicked
         // My implementation of this uses an array with pinned quotes and one with
         // unpinned quotes
@@ -55,6 +84,12 @@ let appendQuote = (quoteObj) => {
         }
         if (newQuoteObj != null) {
             currentQuotes[0].push(newQuoteObj);
+        }
+
+        if (divQuote.getAttribute('class') == 'quote-container') {
+            divQuote.setAttribute('class', 'quote-container-pinned');
+        } else {
+            divQuote.setAttribute('class', 'quote-container');
         }
     });
     // Append finished quote to the expanding-quote-container
@@ -104,8 +139,3 @@ let inputField = document.getElementById('author-name');
 searchIcon.addEventListener('click', (e) => {
     search(inputField.value);
 });
-
-// let quotes = document.getElementsByClassName('quote-container');
-// quotes.addEventListener('onmouseover', (e) => {
-//     quotes.setAttribute('background-color', 'var(--cream)');
-// });

@@ -89,6 +89,21 @@ input {
     background-color: var(--cream);
 }
 
+.quote-container-pinned {
+    display: flex;
+    justify-content: center;
+    padding: 2%;
+    margin: 3%;
+    border-radius: 10px;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 70%;
+    cursor: pointer;
+    background-color: var(--cream);
+    border-color: #0d1b2a;
+    border-style: solid;
+}
+
 #random-quote-container {
     display: flex;
     justify-content: center;
