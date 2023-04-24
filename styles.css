@@ -75,13 +75,18 @@ input {
 .quote-container {
     display: flex;
     justify-content: center;
-    background-color: var(--cream);
+    background-color: white;
     padding: 2%;
     margin: 3%;
     border-radius: 10px;
     margin-left: 5%;
     margin-right: 5%;
     width: 70%;
+    cursor: pointer;
+}
+
+.quote-container:hover {
+    background-color: var(--cream);
 }
 
 #random-quote-container {

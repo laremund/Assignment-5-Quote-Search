@@ -79,40 +79,13 @@ async function search(author) {
     let jsonQuotes = await result.json();
     let quoteObjects = jsonQuotes.results;
 
-// This implementation works, but is probably not the most efficient.
-// It replaces the entire content of the page every time a search is
-// performed (using .innerHtml), making sure to do it in the correct order 
-// so that everything stacks up like it used to
     let body = document.body;
     let mainCont = document.getElementById('main-container');
     let expQuoteCont = document.getElementById('expanding-quote-container');
     
-    // Remove all the content on the page
-    mainCont.remove();
-    expQuoteCont.remove();
-    currentQuotes[1] = [];
-    // I don't know why I had this ^^ here initially, maybe put it back
-    // once I figure out how to get the search to work more than once
-
-    // Replace the content, but this time formatted how it should look once
-    // a quote has been performed
-    let mainContAfterLoad = document.createElement('div');
-    mainContAfterLoad.innerHTML = 
-        `<div id="main-container-results-loaded">
-            <div id="quote-search">
-                <h2>Quote Search</h2>
-            </div>
-            <div id="author-name-container">
-                <input type="text" placeholder="John Cena" id="author-name">
-                <i class="material-symbols-outlined" id="search-icon">search</i>
-            </div>
-        </div>`;
-    let expQuoteContainerAfterLoad = document.createElement('div');
-    expQuoteContainerAfterLoad.innerHTML =
-        `<div id="expanding-quote-container"></div>`;
-    body.appendChild(mainContAfterLoad);
-    body.appendChild(expQuoteContainerAfterLoad);
-
+    mainCont.setAttribute('margin-top', 'none');
+    expQuoteCont.innerHTML = `<div id="expanding-quote-container"></div>`;
+    
     // If there are pinned quotes, append all of them first
     for (i in currentQuotes[0]) {
         appendQuote(currentQuotes[0][i]);
@@ -131,3 +104,8 @@ let inputField = document.getElementById('author-name');
 searchIcon.addEventListener('click', (e) => {
     search(inputField.value);
 });
+
+// let quotes = document.getElementsByClassName('quote-container');
+// quotes.addEventListener('onmouseover', (e) => {
+//     quotes.setAttribute('background-color', 'var(--cream)');
+// });
