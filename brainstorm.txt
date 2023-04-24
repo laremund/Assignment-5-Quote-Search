@@ -4,6 +4,7 @@ Working Checklist (edit it as I think of things that need to be done)
 > Pinning functionality: when a user clicks on a quote, it should be pinned to
 the top, even when a new search is performed the quote should still be there
     > It also needs to be able to be unpinned
+    > This could be done with objects and an array, or just with classes
 > Touch events so that it works on mobile? Do I need separate event
 listeners for touch events?
 
