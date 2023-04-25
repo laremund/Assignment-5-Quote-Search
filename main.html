@@ -12,16 +12,16 @@
 <body>
     <div id="main-container">
         <div id="quote-search">
-            <h2>Quote Search</h2>
+            <h2 aria-label="Quote Search Application">Quote Search</h2>
         </div>
         <div id="author-name-container">
-            <input type="text" placeholder="John Cena" id="author-name">
-            <i class="material-symbols-outlined" id="search-icon">search</i>
+            <input type="text" placeholder="John Cena" id="author-name" tabindex="1" 
+            aria-label="Author Name Goes Here">
+            <i class="material-symbols-outlined" id="search-icon" tabindex="2">search</i>
         </div>
+        <div id="expanding-quote-container" aria-live="assertive"></div>
     </div>
-    <div id="expanding-quote-container">
-        
-    </div>
+    
     <script src="scripts.js"></script>
 </body>
 </html>

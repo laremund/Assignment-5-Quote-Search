@@ -46,24 +46,30 @@ let appendQuote = (quoteObj) => {
     let quotesContainer = document.getElementById('expanding-quote-container');
     let divQuote = document.createElement('div');
 
+    // Assign the relevant classes to the div
     for (i in currentQuotes[0]) {
         let obj = currentQuotes[0][i];
         if (obj == quoteObj) {
             divQuote.setAttribute('class', 'quote-container-pinned');
+            divQuote.tabIndex = 3 + i;
+            divQuote.ariaLive = `assertive`;
         }
     }
     for (i in currentQuotes[1]) {
         let obj = currentQuotes[1][i];
         if (obj == quoteObj) {
             divQuote.setAttribute('class', 'quote-container');
+            let numPinnedQuotes = currentQuotes[0].length;
+            divQuote.tabIndex = 3 + numPinnedQuotes + i;
+            divQuote.ariaLive = `assertive`;
         }
     }
-    // divQuote.setAttribute('class', 'quote-container');
+
     divQuote.innerHTML = quoteHtml;
-    console.log(divQuote);
+
     // Add an event listener that pins a quote to the top of the list if clicked
-        // My implementation of this uses an array with pinned quotes and one with
-        // unpinned quotes
+    // My implementation of this uses an array with pinned quotes and one with
+    // unpinned quotes
     divQuote.addEventListener('click', (e) => {
         let quote = divQuote.innerText;
         let quoteSeparate = quote.split('\n-');
@@ -85,13 +91,20 @@ let appendQuote = (quoteObj) => {
         if (newQuoteObj != null) {
             currentQuotes[0].push(newQuoteObj);
         }
-
+        
         if (divQuote.getAttribute('class') == 'quote-container') {
             divQuote.setAttribute('class', 'quote-container-pinned');
         } else {
             divQuote.setAttribute('class', 'quote-container');
         }
     });
+    
+    divQuote.addEventListener('keypress', (e) => {
+        if (e.key == "Enter" || e.key == " ") {
+            divQuote.click();
+        }
+    });
+
     // Append finished quote to the expanding-quote-container
     quotesContainer.append(divQuote);
 }
@@ -118,7 +131,7 @@ async function search(author) {
     let mainCont = document.getElementById('main-container');
     let expQuoteCont = document.getElementById('expanding-quote-container');
     
-    mainCont.setAttribute('margin-top', 'none');
+    mainCont.style.top = '-50px';
     expQuoteCont.innerHTML = `<div id="expanding-quote-container"></div>`;
     
     // If there are pinned quotes, append all of them first
@@ -138,4 +151,16 @@ let searchIcon = document.getElementById('search-icon');
 let inputField = document.getElementById('author-name');
 searchIcon.addEventListener('click', (e) => {
     search(inputField.value);
+});
+
+inputField.addEventListener('keypress', (e) => {
+    if (e.key == "Enter") {
+        searchIcon.click();
+    }
+});
+
+searchIcon.addEventListener('keypress', (e) => {
+    if (e.key == "Enter" || e.key == " ") {
+        searchIcon.click();
+    }
 });
